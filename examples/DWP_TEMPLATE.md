@@ -20,6 +20,12 @@
 - scope:
   - 탐색_범위_디렉토리/
 
+### ATTACHMENTS (선택 — v1.7.0)
+- (외부 자료 — `https://` 또는 `file:///` URL. 없으면 섹션 자체 생략 가능)
+- 예:
+  - file:///backend/db/migrations/V12__create_users.sql — DDL
+  - https://confluence.example.com/display/DATA/user_profile_schema
+
 ### ISSUE
 - (설계 시점 알려진 제약/미결 문제. 없으면 생략 가능)
 

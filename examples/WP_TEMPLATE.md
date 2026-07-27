@@ -21,7 +21,13 @@
   - 탐색_범위_디렉토리_경로/
   - (복수 scope 가능)
 
-### 5. TODO
+### 5. ATTACHMENTS (선택 — v1.7.0)
+- (외부 자료 — `https://` 또는 `file:///` URL. 없으면 섹션 자체 생략 가능)
+- 예:
+  - https://example.com/spec.pdf
+  - file:///backend/db/migrations/V12__init.sql — 초기 스키마
+
+### 6. TODO
 # TASK (1회성 구현 항목)
 - [ ] 미완료 항목
 - [x] YYYY-MM-DD 완료된 항목
@@ -30,9 +36,9 @@
 - (R) 변경 후 mvn test 실행
 - (R) ESLint 경고 0개 유지
 
-### 6. ISSUE
+### 7. ISSUE
 - (설계 시점 알려진 제약/미결 문제. 없으면 생략 가능)
 
-### 7. COMMENT
+### 8. COMMENT
 - (자유 형식 코멘트. 없으면 생략 가능)
 </WAYPOINT>

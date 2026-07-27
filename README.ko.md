@@ -2,7 +2,7 @@
 
 # LOADSTAR SPEC
 
-**Version: v1.6.0** (2026-05-11, prototype)
+**Version: v1.8.0** (2026-06-01, prototype)
 
 AI 에이전트와 사람이 공유하는 프로젝트 메타데이터 관리 방법론. 코드 수정 의도와 작업 단위를 **WayPoint** 로 추적하고, 탐색 비용을 최소화하기 위해 **주소(URI) 기반 핀포인트 접근**을 원칙으로 한다.
 
@@ -19,11 +19,11 @@ AI 에이전트와 사람이 공유하는 프로젝트 메타데이터 관리 �
 | 파일 | 내용 |
 | :--- | :--- |
 | [01.MASTER_GUIDE](01.MASTER_GUIDE.md) | 시스템 철학, 핵심 요소, AI 행동 강령, 자원 최적화 규약 |
-| [02.SCHEMA_DEF](02.SCHEMA_DEF.md) | 상태 코드, Link 타입, TODO 체크박스, SYNCED_AT 규칙 |
+| [02.SCHEMA_DEF](02.SCHEMA_DEF.md) | 상태 코드, Link 타입, TODO 체크박스, SYNCED_AT 규칙, Attachment URL 스킴 |
 | [03.ADDRESS_CONVENTION](03.ADDRESS_CONVENTION.md) | URI 주소 체계 (`M://`, `W://`, `D://`) 및 물리 파일 경로 변환 |
 | [04.STORAGE](04.STORAGE.md) | 디렉토리 구조, 파일 명명, Git 연동 규약 |
-| [05.ELEMENT_FORMAT](05.ELEMENT_FORMAT.md) | Map/WayPoint/dwp/LOADSTAR_INIT/Decision 포맷, GOAL 슬롯, TODO 아카이브, RECURRING 항목 규약 |
-| [06.CLI_SPEC](06.CLI_SPEC.md) | CLI 명령어 명세 (`init`, `show`, `todo`, `log`, `question`, `validate`) |
+| [05.ELEMENT_FORMAT](05.ELEMENT_FORMAT.md) | Map/WayPoint/dwp/LOADSTAR_INIT/Decision 포맷, GOAL 슬롯, ATTACHMENTS 슬롯, TODO 아카이브, RECURRING 항목 규약 |
+| [06.CLI_SPEC](06.CLI_SPEC.md) | CLI 명령어 명세 (`init`, `show`, `todo`, `log`, `question`, `validate`, `gd` ⚠️미구현) |
 | [07.TODO_SPEC](07.TODO_SPEC.md) | TODO 시스템 규격 — WayPoint STATUS 기반 자동 동기화 |
 | [08.META_SYNC](08.META_SYNC.md) | 메타 동기화 전략 (프롬프트 + CLAUDE.md + Hook + 사후검증) |
 | [09.AI_TOOL_INTEGRATION](09.AI_TOOL_INTEGRATION.md) | 외부 AI 도구(LSP, grep, MCP) 통합 가이드 — CODE_MAP.scope 활용 패턴, 안티패턴, CLAUDE.md 템플릿 |
@@ -44,6 +44,8 @@ AI 에이전트와 사람이 공유하는 프로젝트 메타데이터 관리 �
 - **Data WayPoint (D://)** — 코드와 독립적으로 변화하는 데이터 아티팩트(설정 파일, 참조 데이터, 정적 상태)에 대한 메타 레코드. `.loadstar/DATA_WAYPOINT/`에 저장. `loadstar validate`가 ORPHAN / DANGLING dwp를 감지한다.
 - **GOAL** — Map과 WayPoint 양쪽에 존재하는 *의도* 필드. SUMMARY(정체성)·TODO(실행)와 구분된다. Map은 넓은 목표, WayPoint는 부모 Map GOAL에서 파생된 좁은 목표를 기술한다. Goals Report 화면에서 의도 계층을 한 화면에 조망할 수 있다.
 - **CODE_MAP** — WayPoint 내 섹션. 코드 수정 작업의 탐색 범위(scope)를 디렉토리 단위로 한정.
+- **ATTACHMENTS** — WayPoint·dwp에 존재하는 섹션. 외부 자료(SQL 파일, 설계 PDF, 외부 URL 등)를 표준 URL 스킴(`https://`, `file:///`)으로 매단다. 상세는 `02.SCHEMA_DEF.md §7`.
+- **GD (Good Dopamin)** — `.loadstar/GD/`에 저장되는 맥락 Q&A 요약본. "지금 이 프로젝트에서 신경 써야 할 것들"을 점수 기반으로 관리한다. 매 세션 점수가 깎이고, 당일 관련 작업 시 회복된다. 상세는 `02.SCHEMA_DEF.md §8`. ⚠️ CLI 미구현.
 - **Link / SavePoint** — 논리적 관계 vs 물리적 위치의 엄격한 분리.
 - **Tolerable Consistency** — 완전 일관성 대신 "드리프트를 알고 있는 상태"를 목표로 한다.
 - **TASK / RECURRING** — 1회성 구현 항목(`[ ]` / `[x]`) vs 코드 변경 시마다 재수행하는 검증 항목(`(R)`).

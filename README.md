@@ -2,7 +2,7 @@
 
 # LOADSTAR SPEC
 
-**Version: v1.6.0** (2026-05-11, prototype)
+**Version: v1.8.0** (2026-06-01, prototype)
 
 A project metadata management methodology shared between AI agents and humans. Tracks code modification intent and work units as **WayPoints**, with **URI-based pinpoint access** to minimize lookup costs.
 
@@ -19,11 +19,11 @@ A project metadata management methodology shared between AI agents and humans. T
 | File | Contents |
 | :--- | :--- |
 | [01.MASTER_GUIDE](01.MASTER_GUIDE.md) | System philosophy, core elements, AI behavioral guidelines, resource optimization conventions |
-| [02.SCHEMA_DEF](02.SCHEMA_DEF.md) | Status codes, Link types, TODO checkboxes, SYNCED_AT rules |
+| [02.SCHEMA_DEF](02.SCHEMA_DEF.md) | Status codes, Link types, TODO checkboxes, SYNCED_AT rules, Attachment URL schemes |
 | [03.ADDRESS_CONVENTION](03.ADDRESS_CONVENTION.md) | URI address system (`M://`, `W://`, `D://`) and physical file path conversion |
 | [04.STORAGE](04.STORAGE.md) | Directory structure, file naming, Git integration conventions |
-| [05.ELEMENT_FORMAT](05.ELEMENT_FORMAT.md) | Map/WayPoint/dwp/LOADSTAR_INIT/Decision formats, GOAL slot, TODO archive, RECURRING item conventions |
-| [06.CLI_SPEC](06.CLI_SPEC.md) | CLI command specification (`init`, `show`, `todo`, `log`, `question`, `validate`) |
+| [05.ELEMENT_FORMAT](05.ELEMENT_FORMAT.md) | Map/WayPoint/dwp/LOADSTAR_INIT/Decision formats, GOAL slot, ATTACHMENTS slot, TODO archive, RECURRING item conventions |
+| [06.CLI_SPEC](06.CLI_SPEC.md) | CLI command specification (`init`, `show`, `todo`, `log`, `question`, `validate`, `gd` ⚠️미구현) |
 | [07.TODO_SPEC](07.TODO_SPEC.md) | TODO system specification — WayPoint STATUS-based auto-sync |
 | [08.META_SYNC](08.META_SYNC.md) | Meta-sync strategy (prompt + CLAUDE.md + Hook + post-verification) |
 | [09.AI_TOOL_INTEGRATION](09.AI_TOOL_INTEGRATION.md) | External AI tool integration guide (LSP, grep, MCP) — CODE_MAP.scope usage patterns, anti-patterns, CLAUDE.md template |
@@ -44,6 +44,8 @@ A project metadata management methodology shared between AI agents and humans. T
 - **Data WayPoint (D://)** — A metadata record for a data artifact (config file, reference data, static state) that changes independently of code. Stored in `.loadstar/DATA_WAYPOINT/`. `loadstar validate` detects ORPHAN / DANGLING DWPs.
 - **GOAL** — The *intent* field on both Map and WayPoint. Distinct from SUMMARY (identity) and TODO (execution). Maps hold a broad goal; WayPoints hold a narrowly scoped goal derived from their parent Map's GOAL. Used in the Goals Report screen to trace the intent hierarchy.
 - **CODE_MAP** — A section within a WayPoint. Constrains the search scope for code-change work to specific directories.
+- **ATTACHMENTS** — A section on both WayPoints and dwps. Attaches external resources (SQL files, design PDFs, external URLs, etc.) via standard URL schemes (`https://`, `file:///`). See `02.SCHEMA_DEF.md §7`.
+- **GD (Good Dopamin)** — A context Q&A digest stored in `.loadstar/GD/`. Compresses "everything you need to keep in mind" into a score-managed list. Score decays each session and recovers when related work is done. See `02.SCHEMA_DEF.md §8`. ⚠️ CLI not yet implemented.
 - **Link / SavePoint** — A strict separation between logical relationships and physical locations.
 - **Tolerable Consistency** — Rather than perfect consistency, the goal is "knowing where the drift is."
 - **TASK / RECURRING** — One-time implementation items (`[ ]` / `[x]`) vs. verification items re-run on every code change (`(R)`).
