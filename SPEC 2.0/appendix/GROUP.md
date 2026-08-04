@@ -4,13 +4,13 @@
 
 ## 목적
 
-WP·DWP·다른 GROUP을 조직화하기 위한 순수 카테고리 컨테이너. **선택적이다** — 모든 WP가 GROUP에 속할 필요는 없다. 큰 프로젝트에서 TODO·작업 현황을 하나의 거대한 단위로 관리하기엔 복잡도가 너무 높아질 때, 자연스럽게 분산 관리할 수 있는 선택지를 열어두는 용도다.
+WP·DWP·OTHER·다른 GROUP을 조직화하기 위한 순수 카테고리 컨테이너. **선택적이다** — 모든 WP가 GROUP에 속할 필요는 없다. 큰 프로젝트에서 TODO·작업 현황을 하나의 거대한 단위로 관리하기엔 복잡도가 너무 높아질 때, 자연스럽게 분산 관리할 수 있는 선택지를 열어두는 용도다.
 
 ## 고유 슬롯
 
 | 슬롯 | 값 | 비고 |
 |:--|:--|:--|
-| `CONNECTIONS.ITEMS` | WP/DWP/하위 GROUP 파일명 리스트 | 이 GROUP이 논리적으로 묶는 대상 |
+| `CONNECTIONS.ITEMS` | WP/DWP/OTHER/하위 GROUP 파일명 리스트 | 이 GROUP이 논리적으로 묶는 대상 |
 
 STATUS·GOAL·TODO·TABLES는 갖지 않는다.
 
@@ -32,7 +32,7 @@ GROUP의 `ITEMS`에 다른 GROUP 파일명을 넣으면 그 GROUP이 하위로 �
 - SUMMARY: 이 그룹이 묶는 대상이 무엇인가
 
 ### CONNECTIONS
-- ITEMS: WP/DWP/하위 GROUP 파일명 리스트
+- ITEMS: WP/DWP/OTHER/하위 GROUP 파일명 리스트
 
 ### COMMENT (선택)
 - 자유 형식 코멘트
